@@ -3,7 +3,7 @@ const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/portfolio_db',
-  ssl: false  // Disable SSL for local Docker
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false  // Disable SSL for local Docker
 });
 
 // Test connection
